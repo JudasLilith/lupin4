@@ -42,14 +42,12 @@ class HelloCommand:
         webbrowser.open("https://www.mcmaster.com/")
 
 
-class Downloader:
+class downloader(QtCore.QObject):
     def __init___(self):
         self.downloadItem = QWebEngineCore.QWebEngineDownloadItem #this is the class?
 
     def download(self,download):
-        downloadDirectory = os.path.expandUser("~/Downloads")
-
-        filename = download.suggestedFileName()
+        download.
 
         save_path
 
@@ -76,8 +74,13 @@ class Browser:
         return True
 
     def Activated(self):
+        downloader = downloader()
+        #making the profile
+        profile = QtWebEngineWidgets.QWebEngineProfile.defaultProfile()
+
         self.webView.load(QtCore.QUrl("https://www.mcmaster.com/"))
         self.webView.show()
+        profile.downloadRequested.connect(downloader.download)
 
 
     def getBrowser(self):
