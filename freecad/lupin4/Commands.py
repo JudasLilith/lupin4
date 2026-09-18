@@ -2,16 +2,13 @@
 
 import FreeCAD
 import FreeCADGui
+import sys
 import os
+sys.path.insert(0, os.path.dirname(__file__))
+from simplebrowser.main import runBrowser
 
-from PySide import QtCore
-from PySide import QtWidgets
-
-
-
-import webbrowser
 try:
-  from PySide import QtWebEngineWidgets
+  from PySide6 import QtWebEngineWidgets, QtWidgets, QtCore, QtWebEngineCore
 except ImportError:
   raise Exception("Missing package. Please install: python3-pyside2.qtwebenginewidgets.")
 
@@ -39,58 +36,8 @@ class HelloCommand:
     def Activated(self):
         """Run when the user clicks the toolbar button or menu item."""
         FreeCAD.Console.PrintMessage("Hello from the Minimal workbench!\n")
-        webbrowser.open("https://www.mcmaster.com/")
 
 
-class downloader(QtCore.QObject):
-    def __init___(self):
-        self.downloadItem = QWebEngineCore.QWebEngineDownloadItem #this is the class?
-
-    def download(self,download):
-        download.
-
-        save_path
-
-
-
-
-class Browser:
-    _instance = None
-
-    def __init__(self):
-
-        self.webView = QtWebEngineWidgets.QWebEngineView()
-        self.webView.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-
-
-
-    def GetResources(self):
-        return {
-            "MenuText": "Browser",
-            "ToolTip": "Open browser window",
-        }
-
-    def IsActive(self):
-        return True
-
-    def Activated(self):
-        downloader = downloader()
-        #making the profile
-        profile = QtWebEngineWidgets.QWebEngineProfile.defaultProfile()
-
-        self.webView.load(QtCore.QUrl("https://www.mcmaster.com/"))
-        self.webView.show()
-        profile.downloadRequested.connect(downloader.download)
-
-
-    def getBrowser(self):
-        return self.webView
-
-    @classmethod
-    def getInstance(cls):
-        if cls._instance is None:
-            cls._instance = Browser()
-        return cls._instance
 
 
 
@@ -98,6 +45,4 @@ class Browser:
 
 FreeCADGui.addCommand("Minimal_Hello", HelloCommand())
 
-
-FreeCADGui.addCommand("Browser", Browser.getInstance())
 
