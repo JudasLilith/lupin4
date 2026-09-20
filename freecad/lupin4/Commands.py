@@ -35,6 +35,23 @@ class HelloCommand:
         return True
 
     def Activated(self):
+        if FreeCAD.ActiveDocument is None:
+            QtWidgets.QMessageBox.critical(FreeCADGui.getMainWindow(),"Error!", "mate, you need an active document in a project directory to proceed...")
+            raise Exception("Stopping macro here")
+        
+        parameter = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/lupin4")
+        print(f"parameter = {parameter}")
+        print(f"downloadDirectory = {downloadDirectory}")
+        print(f"type(parameter) = {type(parameter)}")
+        if not parameter.getString(downloadDirectory, ""):
+            QtWidgets.QMessageBox.critical(FreeCADGui.getMainWindow(),"Error!", "mate, I can't find any directories to download, you need to set them again!")
+            #ask for a download path
+            chosen = QtWidgets.QFileDialog.getExistingDirectory(FreeCADGui.getMainWindow(), "choose a folder mate", str( Path.cwd() / "Downloads"))
+            FreeCAD.Console.PrintMessage(str(chosen) + "\n")
+
+            parameter.SetString("downloadDirectory", str(chosen))
+
+        
         """Run when the user clicks the toolbar button or menu item."""
         FreeCAD.Console.PrintMessage("Hello from the Minimal workbench!\n")
         FreeCAD.Console.PrintMessage("starting browser........................!\n")
@@ -45,15 +62,15 @@ class HelloCommand:
         
         FreeCAD.Console.PrintMessage(currentDirectory, "             currentdirectory\n")
         
-        mainDirectory = str(currentDirectory / "simplebrowser")
+        mainBrowserDirectory = str(currentDirectory + "/simplebrowser")
         
-        FreeCAD.Console.PrintMessage(mainDirectory, "                               mainDirectory\n")
+        FreeCAD.Console.PrintMessage(mainBrowserDirectory, "                               mainBrowserDirectory\n")
         
-        mainPath = str(currentDirectory / "simplebrowser" / "main.py")
+        mainBrowserPath = str(mainBrowserDirectory + "/main.py")
         
-        FreeCAD.Console.PrintMessage(mainPath,"             mainPath\n")
+        FreeCAD.Console.PrintMessage(mainBrowserPath,"             mainPath\n")
 
-        subprocess.Popen(["/usr/bin/python3", mainPath],cwd=currentDirectory)
+        subprocess.Popen(["/usr/bin/python3", mainBrowserPath],cwd=mainBrowserDirectory)
         FreeCAD.Console.PrintMessage("\n")
 
 
