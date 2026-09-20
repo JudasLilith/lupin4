@@ -6,8 +6,8 @@ from PySide6.QtWebEngineCore import (qWebEngineChromiumVersion,
                                      QWebEngineProfile, QWebEngineSettings)
 from PySide6.QtCore import QObject, Qt, Slot
 
-from downloadmanagerwidget import DownloadManagerWidget
-from browserwindow import BrowserWindow
+from simplebrowser.downloadmanagerwidget import DownloadManagerWidget
+from simplebrowser.browserwindow import BrowserWindow
 
 
 class Browser(QObject):

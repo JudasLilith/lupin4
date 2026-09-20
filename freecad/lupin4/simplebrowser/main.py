@@ -16,8 +16,7 @@ from browser import Browser
 
 import data.rc_simplebrowser  # noqa: F401
 
-
-if __name__ == "__main__":
+def runMain():
     parser = ArgumentParser(description="Qt Widgets Web Browser",
                             formatter_class=RawTextHelpFormatter)
     parser.add_argument("--single-process", "-s", action="store_true",
@@ -47,3 +46,4 @@ if __name__ == "__main__":
     window.show()
 
     sys.exit(app.exec())
+

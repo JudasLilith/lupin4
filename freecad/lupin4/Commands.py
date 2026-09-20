@@ -4,8 +4,9 @@ import FreeCAD
 import FreeCADGui
 import sys
 import os
-sys.path.insert(0, os.path.dirname(__file__))
-from simplebrowser.main import runBrowser
+import subprocess
+from pathlib import Path
+#from simplebrowser.main import runBrowser
 
 try:
   from PySide6 import QtWebEngineWidgets, QtWidgets, QtCore, QtWebEngineCore
@@ -36,6 +37,24 @@ class HelloCommand:
     def Activated(self):
         """Run when the user clicks the toolbar button or menu item."""
         FreeCAD.Console.PrintMessage("Hello from the Minimal workbench!\n")
+        FreeCAD.Console.PrintMessage("starting browser........................!\n")
+        
+
+
+        currentDirectory = os.path.dirname(os.path.abspath(__file__))
+        
+        FreeCAD.Console.PrintMessage(currentDirectory, "             currentdirectory\n")
+        
+        mainDirectory = str(currentDirectory / "simplebrowser")
+        
+        FreeCAD.Console.PrintMessage(mainDirectory, "                               mainDirectory\n")
+        
+        mainPath = str(currentDirectory / "simplebrowser" / "main.py")
+        
+        FreeCAD.Console.PrintMessage(mainPath,"             mainPath\n")
+
+        subprocess.Popen(["/usr/bin/python3", mainPath],cwd=currentDirectory)
+        FreeCAD.Console.PrintMessage("\n")
 
 
 
