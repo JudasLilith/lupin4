@@ -9,6 +9,7 @@ from PySide6.QtCore import QDir, QFileInfo, Qt
 from downloadwidget import DownloadWidget
 from ui_downloadmanagerwidget import Ui_DownloadManagerWidget
 
+import os
 
 # Displays a list of downloads.
 class DownloadManagerWidget(QWidget):
@@ -21,8 +22,10 @@ class DownloadManagerWidget(QWidget):
 
     def download_requested(self, download):
         assert (download and download.state() == QWebEngineDownloadRequest.DownloadRequested)
-
-        proposal_dir = download.downloadDirectory()
+        
+        path = os.environ.get('PATH')
+        proposal_dir = path
+        #download.downloadDirectory()
         proposal_name = download.downloadFileName()
         proposal = QDir(proposal_dir).filePath(proposal_name)
         path, _ = QFileDialog.getSaveFileName(self, "Save as", proposal)

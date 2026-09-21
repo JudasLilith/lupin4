@@ -30,8 +30,8 @@ class lupin4Workbench(FreeCADGui.Workbench):
         # command by name so we can reference it below.
         from . import Commands  # noqa: F401
 
-        self.appendToolbar("Minimal", ["Minimal_Hello"])
-        self.appendMenu("Minimal", ["Minimal_Hello"])
+        self.appendToolbar("Minimal", ["Minimal_Hello","Initialize"])
+        self.appendMenu("Minimal", ["Minimal_Hello","Initialize"])
 
     def GetClassName(self):
         """Required for Python workbenches. Must return this *exact* string, DO NOT MODIFY."""

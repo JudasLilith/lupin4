@@ -42,8 +42,15 @@ if __name__ == "__main__":
     browser = Browser()
     window = browser.create_hidden_window()
 
-    url = QUrl.fromUserInput(args.url) if args.url else QUrl("https://mcmaster.com")
-    window.tab_widget().set_url(url)
+    urlMcMaster = QUrl.fromUserInput(args.url) if args.url else QUrl("https://mcmaster.com") 
+    window.tab_widget().set_url(urlMcMaster)
+
+    window.tab_widget().create_tab()
+    window.tab_widget().set_url(QUrl("https://grabcad.com/dashboard"))
+
+    window.tab_widget().create_tab()
+    window.tab_widget().set_url(QUrl("https://misumi.com/"))
+
     window.show()
 
     sys.exit(app.exec())
