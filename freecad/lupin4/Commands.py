@@ -5,7 +5,9 @@ import FreeCADGui
 import sys
 import os
 import subprocess
+import ImportGui
 from pathlib import Path
+import threading
 #from simplebrowser.main import runBrowser
 
 try:
@@ -14,24 +16,22 @@ except ImportError:
   raise Exception("Missing package. Please install: python3-pyside2.qtwebenginewidgets.")
 
 
+def runfunction():
+    continue
 
 
 
 
 
-
-class HelloCommand:
-    """A one-line command that prints a message to the Report view."""
-
+class OpenImporter:
     def GetResources(self):
         return {
-            "MenuText": "Hello",
-            "ToolTip": "Print a hello message to the Report view.",
+            "MenuText": "OpenImporter",
+            "ToolTip": "Opens the importer, have fun with \'em",
             # "Pixmap":  "hello.svg",  # filename on the registered icon path
         }
 
     def IsActive(self):
-        """Return True whenever the command should be enabled."""
         return True
 
     def Activated(self):
@@ -61,11 +61,21 @@ class HelloCommand:
         mainBrowserPath = str(mainBrowserDirectory + "/main.py") 
         FreeCAD.Console.PrintMessage(mainBrowserPath,"             mainPath\n")
 
-        env = {
-            'PATH': str(downloadDirectory)
-        }
-        subprocess.Popen(["/usr/bin/python3", mainBrowserPath],env=env,cwd=mainBrowserDirectory)
+
+
+        env = os.environ.copy()
+        env['downloadPath'] = str(downloadDirectory)
+
+        process = subprocess.Popen(["/usr/bin/python3", mainBrowserPath], env=env,cwd=mainBrowserDirectory,stdout=subprocess.PIPE,text=True)
+
+        for line in process.stdout:
+            filename = line.strip() # Process each line as it comes
+            Free
+            ImportGui.insert(downloadDirectory, filename)
+        process.wait()  # Wait for it to finish
         FreeCAD.Console.PrintMessage("\n")
+
+        
 
 
 
@@ -73,8 +83,8 @@ class HelloCommand:
 class Initialize:
     def GetResources(self):
         return {
-            "MenuText": "Initialize Lupin",
-            "ToolTip": "Set the directory, and whatnot",
+            "MenuText": "Initialize",
+            "ToolTip": "Set the directory, for your project",
             # "Pixmap":  "hello.svg",  # filename on the registered icon path
         }
 
@@ -104,7 +114,7 @@ class Initialize:
 
 
 
-FreeCADGui.addCommand("Minimal_Hello", HelloCommand())
+FreeCADGui.addCommand("OpenImporter", OpenImporter())
 FreeCADGui.addCommand("Initialize", Initialize())
 
 

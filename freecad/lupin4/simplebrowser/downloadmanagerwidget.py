@@ -23,9 +23,9 @@ class DownloadManagerWidget(QWidget):
     def download_requested(self, download):
         assert (download and download.state() == QWebEngineDownloadRequest.DownloadRequested)
         
-        path = os.environ.get('PATH')
-        proposal_dir = path
-        #download.downloadDirectory()
+        downloadPath = os.environ.get('downloadPath')
+        pid = os.environ,get('originalProcess')
+        proposal_dir = downloadPath#download.downloadDirectory()
         proposal_name = download.downloadFileName()
         proposal = QDir(proposal_dir).filePath(proposal_name)
         path, _ = QFileDialog.getSaveFileName(self, "Save as", proposal)
@@ -33,9 +33,10 @@ class DownloadManagerWidget(QWidget):
             return
 
         fi = QFileInfo(path)
-        download.setDownloadDirectory(fi.path())
+        download.setDownloadDirectory(downloadPath)
         download.setDownloadFileName(fi.fileName())
         download.accept()
+        print(fi.fileName())
         self.add(DownloadWidget(download))
 
         self.show()

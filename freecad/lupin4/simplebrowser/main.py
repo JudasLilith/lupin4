@@ -46,10 +46,10 @@ if __name__ == "__main__":
     window.tab_widget().set_url(urlMcMaster)
 
     window.tab_widget().create_tab()
-    window.tab_widget().set_url(QUrl("https://grabcad.com/dashboard"))
+    window.tab_widget().set_url(QUrl("https://grabcad.com/library"))
 
     window.tab_widget().create_tab()
-    window.tab_widget().set_url(QUrl("https://misumi.com/"))
+    window.tab_widget().set_url(QUrl("https://us.misumi-ec.com/vona2/maker/misumi/"))
 
     window.show()
 

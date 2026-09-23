@@ -14,13 +14,10 @@ _ICON = os.path.join(_ADDON_ROOT, "Resources", "Icons", "Logo.svg")
 
 
 class lupin4Workbench(FreeCADGui.Workbench):
-    """The smallest useful FreeCAD workbench.
 
-    Contributes a single command ("Hello") to a toolbar and menu.
-    """
 
-    MenuText = "Minimal"
-    ToolTip = "A minimal example workbench."
+    MenuText = "Lupin4"
+    ToolTip = "An importer for FreeCAD."
     Icon = _ICON
 
     def Initialize(self):
@@ -30,8 +27,8 @@ class lupin4Workbench(FreeCADGui.Workbench):
         # command by name so we can reference it below.
         from . import Commands  # noqa: F401
 
-        self.appendToolbar("Minimal", ["Minimal_Hello","Initialize"])
-        self.appendMenu("Minimal", ["Minimal_Hello","Initialize"])
+        self.appendToolbar("Lupin4", ["OpenImporter","Initialize"])
+        self.appendMenu("Lupin4", ["OpenImporter","Initialize"])
 
     def GetClassName(self):
         """Required for Python workbenches. Must return this *exact* string, DO NOT MODIFY."""
