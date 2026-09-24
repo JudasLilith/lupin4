@@ -24,7 +24,7 @@ class DownloadManagerWidget(QWidget):
         assert (download and download.state() == QWebEngineDownloadRequest.DownloadRequested)
         
         downloadPath = os.environ.get('downloadPath')
-        pid = os.environ,get('originalProcess')
+
         proposal_dir = downloadPath#download.downloadDirectory()
         proposal_name = download.downloadFileName()
         proposal = QDir(proposal_dir).filePath(proposal_name)

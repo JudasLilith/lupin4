@@ -27,8 +27,8 @@ class lupin4Workbench(FreeCADGui.Workbench):
         # command by name so we can reference it below.
         from . import Commands  # noqa: F401
 
-        self.appendToolbar("Lupin4", ["OpenImporter","Initialize"])
-        self.appendMenu("Lupin4", ["OpenImporter","Initialize"])
+        self.appendToolbar("Lupin4", ["OpenImporter","Initialize","ImportEverything"])
+        self.appendMenu("Lupin4", ["OpenImporter","Initialize","ImportEverything"])
 
     def GetClassName(self):
         """Required for Python workbenches. Must return this *exact* string, DO NOT MODIFY."""

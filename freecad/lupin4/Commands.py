@@ -16,9 +16,6 @@ except ImportError:
   raise Exception("Missing package. Please install: python3-pyside2.qtwebenginewidgets.")
 
 
-def runfunction():
-    continue
-
 
 
 
@@ -68,14 +65,42 @@ class OpenImporter:
 
         process = subprocess.Popen(["/usr/bin/python3", mainBrowserPath], env=env,cwd=mainBrowserDirectory,stdout=subprocess.PIPE,text=True)
 
-        for line in process.stdout:
-            filename = line.strip() # Process each line as it comes
-            Free
-            ImportGui.insert(downloadDirectory, filename)
-        process.wait()  # Wait for it to finish
+
+
         FreeCAD.Console.PrintMessage("\n")
 
         
+class ImportEverything:
+    def GetResources(self):
+        return {
+            "MenuText": "ImportEverything",
+            "ToolTip": "Actually pulls out the imported files from the directory",
+            # "Pixmap":  "hello.svg",  # filename on the registered icon path
+        }
+
+    def IsActive(self):
+        return True
+
+    def Activated(self):
+        if FreeCAD.ActiveDocument is None:
+            QtWidgets.QMessageBox.critical(FreeCADGui.getMainWindow(),"Error!", "mate, you need an active document in a project directory to proceed...")
+            return None
+
+        params = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/lupin4")
+        downloadPath = params.GetString("downloadDirectory") 
+        if downloadPath == "":
+            QtWidgets.QMessageBox.warning(FreeCADGui.getMainWindow(),"Error!","downloadPath environment variable not set")
+            return None
+        for file in os.listdir(str(downloadPath)):
+            filepath = os.path.join(downloadPath, file)
+            if FreeCAD.getDocument( os.path.splitext(file)[0]):
+                FreeCAD.Console.PrintMessage(filepath + "\n")
+                FreeCAD.Console.PrintMessage(file + "\n")
+                continue
+            else:
+                FreeCAD.Console.PrintMessage(filepath + "\n")
+                FreeCAD.Console.PrintMessage(file + "\n")
+                FreeCADGui.insert(filepath, file)
 
 
 
@@ -116,6 +141,8 @@ class Initialize:
 
 FreeCADGui.addCommand("OpenImporter", OpenImporter())
 FreeCADGui.addCommand("Initialize", Initialize())
+FreeCADGui.addCommand("ImportEverything", ImportEverything())
+
 
 
 
