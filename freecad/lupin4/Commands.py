@@ -114,7 +114,6 @@ class Initialize:
         }
 
     def IsActive(self):
-        """Return True whenever the command should be enabled."""
         return True
 
     def Activated(self):
@@ -129,6 +128,7 @@ class Initialize:
         FreeCAD.Console.PrintMessage(f"type(parameter) = {type(parameter)}")
         QtWidgets.QMessageBox.critical(FreeCADGui.getMainWindow(),"Error!", "mate, I can't find any directories to download, you need to set them again!")
         chosen = QtWidgets.QFileDialog.getExistingDirectory(FreeCADGui.getMainWindow(), "choose a folder mate", str( Path.cwd() / "Downloads"))
+        
         #ask for a download path
         FreeCAD.Console.PrintMessage(str(chosen) + "\n")
         parameter.SetString("downloadDirectory", str(chosen))

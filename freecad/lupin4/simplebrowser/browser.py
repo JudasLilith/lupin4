@@ -10,6 +10,7 @@ from downloadmanagerwidget import DownloadManagerWidget
 from browserwindow import BrowserWindow
 
 
+    
 class Browser(QObject):
 
     def __init__(self, parent=None):
@@ -18,8 +19,7 @@ class Browser(QObject):
         self._download_manager_widget = DownloadManagerWidget()
         self._profile = None
 
-        # Quit application if the download manager window is the only
-        # remaining window
+
         self._download_manager_widget.setAttribute(Qt.WidgetAttribute.WA_QuitOnClose, False)
 
     def create_hidden_window(self, offTheRecord=False):
