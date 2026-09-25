@@ -51,6 +51,10 @@ if __name__ == "__main__":
     window.tab_widget().create_tab()
     window.tab_widget().set_url(QUrl("https://us.misumi-ec.com/vona2/maker/misumi/"))
 
+
+    window.tab_widget().create_tab()
+    window.tab_widget().set_url(QUrl("https://webbrowsertools.com/test-download-with/"))
+
     window.show()
 
     sys.exit(app.exec())

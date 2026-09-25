@@ -87,21 +87,39 @@ class ImportEverything:
             return None
 
         params = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/lupin4")
-        downloadPath = params.GetString("downloadDirectory") 
-        if downloadPath == "":
+        downloadPath = params.GetString("downloadDirectory")
+
+        if not downloadPath:
             QtWidgets.QMessageBox.warning(FreeCADGui.getMainWindow(),"Error!","downloadPath environment variable not set")
             return None
-        for file in os.listdir(str(downloadPath)):
-            filepath = os.path.join(downloadPath, file)
-            if FreeCAD.getDocument( os.path.splitext(file)[0]):
-                FreeCAD.Console.PrintMessage(filepath + "\n")
-                FreeCAD.Console.PrintMessage(file + "\n")
-                continue
-            else:
-                FreeCAD.Console.PrintMessage(filepath + "\n")
-                FreeCAD.Console.PrintMessage(file + "\n")
-                FreeCADGui.insert(filepath, file)
 
+        doclist = FreeCAD.listDocuments()
+
+        for file in os.listdir(str(downloadPath)):
+
+            filepath = os.path.join(downloadPath, file)
+            
+            if os.path.isdir(filepath): 
+                continue
+
+            docname, ext = os.path.splitext(file)
+            ext = ext.lower()
+
+            if docname in doclist:
+                continue
+
+            try:
+            # Import based on file type
+                if ext in ['.stp', '.step']:
+                    ImportGui.insert(filepath, FreeCAD.ActiveDocument.Name)
+                elif ext in ['.iges', '.igs']:
+                     ImportGui.insert(filepath, FreeCAD.ActiveDocument.Name)
+                elif ext in ['.stl']:
+                    ImportGui.insert(filepath, FreeCAD.ActiveDocument.Name)
+                elif ext in ['.fcstd']:
+                    FreeCAD.open(filepath)
+            except Exception as e:
+                QtWidgets.QMessageBox.warning(FreeCADGui.getMainWindow(), "Importing error",f"failed to import {file}: {str(e)} ")
 
 
 
