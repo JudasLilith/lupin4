@@ -15,7 +15,8 @@ try:
 except ImportError:
   raise Exception("Missing package. Please install: python3-pyside2.qtwebenginewidgets.")
 
-
+def pr(stringvar):
+    FreeCAD.Console.PrintMessage(stringvar + "\n")
 
 
 
@@ -87,7 +88,9 @@ class ImportEverything:
             return None
 
         params = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/lupin4")
+        pr("got the params")
         downloadPath = params.GetString("downloadDirectory")
+        pr("current downloadDirectory is: " + downloadPath)
 
         if not downloadPath:
             QtWidgets.QMessageBox.warning(FreeCADGui.getMainWindow(),"Error!","downloadPath environment variable not set")
@@ -110,13 +113,17 @@ class ImportEverything:
 
             try:
             # Import based on file type
-                if ext in ['.stp', '.step']:
+                if ext in ['.stp', '.step', '.STP' , '.STEP']:
+                    pr("its a step or stp file")
                     ImportGui.insert(filepath, FreeCAD.ActiveDocument.Name)
                 elif ext in ['.iges', '.igs']:
-                     ImportGui.insert(filepath, FreeCAD.ActiveDocument.Name)
+                    pr("its a igs file")
+                    ImportGui.insert(filepath, FreeCAD.ActiveDocument.Name)
                 elif ext in ['.stl']:
+                    pr("its a stl file, why the fuck are you opening this")
                     ImportGui.insert(filepath, FreeCAD.ActiveDocument.Name)
                 elif ext in ['.fcstd']:
+                    pr("mate, this is a new freecad project.......")
                     FreeCAD.open(filepath)
             except Exception as e:
                 QtWidgets.QMessageBox.warning(FreeCADGui.getMainWindow(), "Importing error",f"failed to import {file}: {str(e)} ")
