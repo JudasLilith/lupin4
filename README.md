@@ -20,8 +20,26 @@ A importing addon for FreeCAD
 
 1. Type up: lupin4
 
-2. usage:
+2. install the program onto your pc, reload FreeCAD.
 3. there are 3 main buttons: The OpenImporter, Initialize, and ImportEverything.
+   ![list](./images/swappy-20260927-210008.png)
+
+> [!CAUTION]
+> be sure to have a working file, or else the first step wouldn't work.
+> ![list](./images/swappy-20260927-210417.png)
+
+1. set up a file that you would be comfortable for the program to store the imported files in.
+   ![list](./images/swappy-20260927-210503.png)
+
+1) after setting up, open up the OpenImporter, where there would be multiple tabs of GrabCAD, McMaster, and Misumi.
+   ![list](./images/swappy-20260927-210601.png)
+
+1. Make an account(Dw, all the login info is stored) and download the files as you would from a normal browser.
+   ![list](./images/swappy-20260927-210612.png)
+
+1) after downloading everything, press the ImportEverything button to load all the downloaded models onto your working file. Enjoy!
+
+![list](./images/swappy-20260927-212855.png)
 
 ##### Inspired by/Based on
 
