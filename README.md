@@ -1,4 +1,4 @@
-<img src="lupin.svg" style="filter: invert(1);" />
+![lupin image](./lupinNormalinverted.png)
 
 <!-- Or embed SVG directly -->
 
