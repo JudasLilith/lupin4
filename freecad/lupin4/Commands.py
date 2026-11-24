@@ -91,20 +91,21 @@ class ImportEverything:
         if downloadPath == "":
             QtWidgets.QMessageBox.warning(FreeCADGui.getMainWindow(),"Error!","downloadPath environment variable not set")
             return None
+        open_docs = {doc.Label: doc.Name for doc in FreeCAD.listDocuments().values()}
+
         for file in os.listdir(str(downloadPath)):
-            filepath = os.path.join(downloadPath, file)
-            if FreeCAD.getDocument( os.path.splitext(file)[0]):
-                FreeCAD.Console.PrintMessage(filepath + "\n")
-                FreeCAD.Console.PrintMessage(file + "\n")
+            if not file.lower().endswith((".step", ".stp")):
                 continue
-            else:
-                FreeCAD.Console.PrintMessage(filepath + "\n")
-                FreeCAD.Console.PrintMessage(file + "\n")
-                FreeCADGui.insert(filepath, file)
 
+            filepath = os.path.join(downloadPath, file)
+            doc_label = os.path.splitext(file)[0]
 
+            if doc_label in open_docs:
+                FreeCAD.Console.PrintMessage(f"Already open: {filepath}\n")
+                continue
 
-
+            doc = FreeCAD.newDocument(doc_label)
+            ImportGui.insert(filepath, doc.Name)
 class Initialize:
     def GetResources(self):
         return {
