@@ -2,7 +2,7 @@ readme:
 
 ![lupin image](./lupinNormalinverted.png)
 
-<!-- Or embed SVG directly -->
+
 
 # lupin4
 
