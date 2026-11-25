@@ -14,7 +14,7 @@
 [ Info ]―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 -->
 <description>
-Workbench that has various toolbars, dialogs and more.
+An importer that opens a new page, and make the 
 </description>
 <name>Workbench</name>
 <!--
@@ -25,11 +25,11 @@ Workbench that has various toolbars, dialogs and more.
 <!--
 [ Maintainers ]――――――――――――――――――――――――――――――――――――――――――――――――――――――
 -->
-<maintainer email="John.Doe@website.com">John Doe</maintainer>
+<maintainer email="judas1lilith@gmail.com">Judas Lilith</maintainer>
 <!--
 [ Authors ]――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 -->
-<author email="John.Doe@website.com">John Doe</author>
+<author email="judas1lilith@gmail.com">Judas Lilith</author>
 <!--
 [ Licenses ]―――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 -->
@@ -42,12 +42,12 @@ Workbench that has various toolbars, dialogs and more.
 [ Urls ]―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 -->
 <url type="documentation">
-https://github.com/FreeCAD/Addon-Workbench/tree/Latest/Documentation
+    https://github.com/JudasLilith/lupin4
 </url>
-<url branch="Latest" type="repository">https://github.com/FreeCAD/Addon-Workbench</url>
-<url type="bugtracker">https://github.com/FreeCAD/Addon-Workbench/issues</url>
+<url branch="Latest" type="repository">https://github.com/JudasLilith/lupin4</url>
+  <url type="bugtracker">https://github.com/JudasLilith/lupin4/issues</url>
 <url type="readme">
-https://github.com/FreeCAD/Addon-Workbench/blob/Latest/Resources/Documents/Overview.md
+https://github.com/JudasLilith/lupin4/blob/main/README.md
 </url>
 <!--
 [ Content ]――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
