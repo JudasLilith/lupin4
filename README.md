@@ -1,7 +1,4 @@
-readme:
-
-![lupin image](./lupinNormalinverted.png)
-
+![lupinimage](images/lupinNormalinverted.png )
 
 
 # lupin4
